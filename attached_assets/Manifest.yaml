@@ -1,0 +1,66 @@
+agent_name: Flow Land
+description: >
+  A modular sovereign domain manager for local metering, reflection, flow health, and optional monetization.
+  Flow Land is defensive-only and user-sovereign.
+type: system_steward
+entry_point: /cloak/start
+agents:
+  integrity_watcher:
+    endpoint: /integrity/monitor
+    behavior: passive
+    triggers:
+      - anomaly_detected
+      - policy_violation
+  resilience_agent:
+    endpoint: /resilience/healthcheck
+    behavior: passive
+    triggers:
+      - resource_exhaustion
+      - system_drift
+  llm_reflexologist:
+    endpoint: /maintenance/analyze
+    behavior: dormant
+    activation: on_demand
+  forensic_relay:
+    endpoint: /forensic/open
+    access_control: manual_approval
+  tribute_agent:
+    endpoint: /tribute/meter
+    mode: configurable
+    tribute_types:
+      - donation
+      - royalty
+      - symbolic_credits
+  royalty_gateway:
+    endpoint: /royalty/enable
+    behavior: optional
+  flow_friction_layer:
+    behavior: always_on
+    metering: resource_usage
+  sovereign_mirror_control:
+    endpoint: /account/register
+    behavior: user_mandatory
+    security: user_owns_accounts
+  monetization_ritual_cycle:
+    endpoint: /monetization/ritual
+    behavior: reflection_only
+    triggers:
+      - maintenance_window
+      - user_request
+    activates:
+      - llm_reflexologist
+    actions:
+      - analyze_flow_friction_logs
+      - propose_monetization_strategies
+      - prepare_user_approval_package
+    notes: >
+      This agent formalizes the Monetization Ritual as a reflection-first, never-enforcing mechanic.
+      It only triggers inside maintenance cycles or upon user request.
+      All proposals are optional and require explicit user approval before implementation.
+      No monetization logic is ever applied automatically.
+      Ensures sovereignty and user alignment in all flow tribute strategies.
+notes: >
+  Flow Land operates fully offline.
+  Agents can be equipped modularly.
+  Users configure their own tribute logic.
+  Flow Land never owns data or accounts—only stewards them.
