@@ -9,6 +9,11 @@ import Dashboard from "@/pages/Dashboard";
 import Tribute from "@/pages/Tribute";
 import Integrity from "@/pages/Integrity";
 import Rituals from "@/pages/Rituals";
+import Reflexologist from "@/pages/Reflexologist";
+import Forensic from "@/pages/Forensic";
+import Resilience from "@/pages/Resilience";
+import Settings from "@/pages/Settings";
+import Mirrors from "@/pages/Mirrors";
 import Sidebar from "@/components/layout/Sidebar";
 
 function Router() {
@@ -23,6 +28,11 @@ function Router() {
           <Route path="/tribute" component={Tribute} />
           <Route path="/integrity" component={Integrity} />
           <Route path="/rituals" component={Rituals} />
+          <Route path="/reflexologist" component={Reflexologist} />
+          <Route path="/forensic" component={Forensic} />
+          <Route path="/resilience" component={Resilience} />
+          <Route path="/settings" component={Settings} />
+          <Route path="/mirrors" component={Mirrors} />
           <Route component={NotFound} />
         </Switch>
       </main>
