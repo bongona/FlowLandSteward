@@ -38,6 +38,7 @@ export default function Sidebar({ currentPath }: SidebarProps) {
         { path: "/tribute", label: "Tribute Management", icon: "fa-hand-holding-usd" },
         { path: "/integrity", label: "Integrity Monitor", icon: "fa-shield-virus" },
         { path: "/rituals", label: "Monetization Rituals", icon: "fa-sync" },
+        { path: "/knowledge", label: "Knowledge Base", icon: "fa-book" },
       ]
     },
     {

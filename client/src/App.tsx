@@ -4,6 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "./components/ThemeProvider";
+import { TooltipProvider as CustomTooltipProvider } from "./components/TooltipContext";
 import NotFound from "@/pages/not-found";
 import Dashboard from "@/pages/Dashboard";
 import Tribute from "@/pages/Tribute";
@@ -14,6 +15,7 @@ import Forensic from "@/pages/Forensic";
 import Resilience from "@/pages/Resilience";
 import Settings from "@/pages/Settings";
 import Mirrors from "@/pages/Mirrors";
+import KnowledgeBase from "@/pages/KnowledgeBase";
 import Sidebar from "@/components/layout/Sidebar";
 
 function Router() {
@@ -28,6 +30,7 @@ function Router() {
           <Route path="/tribute" component={Tribute} />
           <Route path="/integrity" component={Integrity} />
           <Route path="/rituals" component={Rituals} />
+          <Route path="/knowledge" component={KnowledgeBase} />
           <Route path="/reflexologist" component={Reflexologist} />
           <Route path="/forensic" component={Forensic} />
           <Route path="/resilience" component={Resilience} />
@@ -44,10 +47,12 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="light" storageKey="flow-land-theme">
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
+        <CustomTooltipProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Router />
+          </TooltipProvider>
+        </CustomTooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );
