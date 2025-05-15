@@ -192,13 +192,16 @@ export class DatabaseStorage implements IStorage {
   }
   
   async getRituals(status?: string): Promise<MonetizationRitual[]> {
-    let query = db.select().from(monetizationRituals);
-    
     if (status) {
-      query = query.where(eq(monetizationRituals.status, status));
+      return db.select()
+        .from(monetizationRituals)
+        .where(eq(monetizationRituals.status, status))
+        .orderBy(desc(monetizationRituals.createdAt));
+    } else {
+      return db.select()
+        .from(monetizationRituals)
+        .orderBy(desc(monetizationRituals.createdAt));
     }
-    
-    return query.orderBy(desc(monetizationRituals.createdAt));
   }
   
   async getRitual(id: number): Promise<MonetizationRitual | undefined> {
@@ -221,7 +224,7 @@ export class DatabaseStorage implements IStorage {
       .update(monetizationRituals)
       .set({ 
         status: 'completed',
-        completedAt: new Date().toISOString(),
+        completionDate: new Date(),
         recommendedMode,
         insights: JSON.stringify(insights)
       })

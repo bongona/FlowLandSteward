@@ -385,7 +385,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Format logs for frontend
       const formattedLogs = logs.map(log => ({
         id: log.id.toString(),
-        timestamp: log.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
+        timestamp: log.timestamp ? log.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 'Unknown time',
         agent: 'INTEGRITY_WATCHER',
         agentColor: 'green',
         message: log.message
