@@ -83,25 +83,53 @@ export default function Dashboard() {
       
       {/* Recent Activity & Flow Metrics */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <ActivityLog logs={logs || []} isLoading={logsLoading} />
-        <FlowMetricsChart data={flowMetrics || { totalOperations: 0, peakRate: "0/hr", hourlyMetrics: [] }} isLoading={metricsLoading} />
+        <div className="flex flex-col">
+          <div className="flex items-center mb-2">
+            <h3 className="text-lg font-medium">Activity Log</h3>
+            <InlineHelp topic="activity-log" position="dashboard" />
+          </div>
+          <ActivityLog logs={logs || []} isLoading={logsLoading} />
+        </div>
+        
+        <div className="flex flex-col">
+          <div className="flex items-center mb-2">
+            <h3 className="text-lg font-medium">Flow Metrics</h3>
+            <InlineHelp topic="metrics" position="dashboard" />
+          </div>
+          <FlowMetricsChart 
+            data={flowMetrics || { totalOperations: 0, peakRate: "0/hr", hourlyMetrics: [] }} 
+            isLoading={metricsLoading} 
+          />
+        </div>
       </div>
       
       {/* Tribute Management */}
-      {tributeLoading ? (
-        <div className="bg-white dark:bg-neutral shadow rounded-lg p-6 animate-pulse">
-          <div className="h-64"></div>
+      <div className="mt-2">
+        <div className="flex items-center mb-2">
+          <h3 className="text-lg font-medium">Tribute Management</h3>
+          <InlineHelp topic="mode-selection" position="tribute" />
         </div>
-      ) : (
-        <TributeManagement 
-          activeMode={tributeData.activeMode} 
-          statistics={tributeData.statistics}
-          onModeChange={(mode) => console.log("Mode changed to:", mode)}
-        />
-      )}
+        
+        {tributeLoading ? (
+          <div className="bg-white dark:bg-neutral shadow rounded-lg p-6 animate-pulse">
+            <div className="h-64"></div>
+          </div>
+        ) : (
+          <TributeManagement 
+            activeMode={tributeData?.activeMode} 
+            statistics={tributeData?.statistics}
+            onModeChange={(mode) => console.log("Mode changed to:", mode)}
+          />
+        )}
+      </div>
       
       {/* Agent Status Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+        <div className="col-span-full flex items-center mb-2">
+          <h3 className="text-lg font-medium">Domain Agents</h3>
+          <InlineHelp topic="agent-status" position="agents" />
+        </div>
+        
         {agentsLoading ? (
           Array(3).fill(0).map((_, i) => (
             <div key={i} className="bg-white dark:bg-neutral shadow rounded-lg p-4 animate-pulse">
@@ -109,7 +137,7 @@ export default function Dashboard() {
             </div>
           ))
         ) : (
-          agents.map((agent) => (
+          agents?.map((agent) => (
             <AgentCard key={agent.id} agent={agent} />
           ))
         )}
