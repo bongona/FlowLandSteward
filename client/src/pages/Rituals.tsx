@@ -140,18 +140,18 @@ export default function Rituals() {
             </div>
           </div>
           <Button variant="link" className="text-primary hover:text-primary-dark dark:hover:text-primary-light">
-            View Report
+            View Analysis Report
           </Button>
         </div>
       </div>
       
       <div>
-        <h3 className="text-lg font-bold mb-4">Ritual History</h3>
+        <h3 className="text-lg font-bold mb-4">Analysis History</h3>
         
         <Tabs defaultValue="completed" className="w-full">
           <TabsList className="mb-4">
-            <TabsTrigger value="completed">Completed Rituals</TabsTrigger>
-            <TabsTrigger value="scheduled">Scheduled Rituals</TabsTrigger>
+            <TabsTrigger value="completed">Completed Analyses</TabsTrigger>
+            <TabsTrigger value="scheduled">Scheduled Analyses</TabsTrigger>
           </TabsList>
           
           <TabsContent value="completed">
@@ -159,10 +159,10 @@ export default function Rituals() {
               {!ritualHistory?.completed || ritualHistory.completed.length === 0 ? (
                 <div className="col-span-2 text-center py-12 bg-white dark:bg-neutral rounded-lg shadow">
                   <div className="text-gray-400 mb-2">
-                    <i className="fas fa-scroll text-4xl"></i>
+                    <i className="fas fa-chart-bar text-4xl"></i>
                   </div>
-                  <h4 className="text-lg font-medium">No Completed Rituals</h4>
-                  <p className="text-sm text-gray-500 mt-1">Begin your first monetization ritual to see results here</p>
+                  <h4 className="text-lg font-medium">No Completed Analyses</h4>
+                  <p className="text-sm text-gray-500 mt-1">Initialize your first resource allocation analysis to view evaluation results here</p>
                 </div>
               ) : (
                 ritualHistory.completed.map((ritual) => (
@@ -208,17 +208,17 @@ export default function Rituals() {
               {!ritualHistory?.scheduled || ritualHistory.scheduled.length === 0 ? (
                 <div className="col-span-2 text-center py-12 bg-white dark:bg-neutral rounded-lg shadow">
                   <div className="text-gray-400 mb-2">
-                    <i className="fas fa-calendar text-4xl"></i>
+                    <i className="fas fa-calendar-alt text-4xl"></i>
                   </div>
-                  <h4 className="text-lg font-medium">No Scheduled Rituals</h4>
-                  <p className="text-sm text-gray-500 mt-1">Schedule your next ritual to optimize monetization</p>
+                  <h4 className="text-lg font-medium">No Scheduled Analyses</h4>
+                  <p className="text-sm text-gray-500 mt-1">Schedule your next resource allocation evaluation to optimize contribution systems</p>
                 </div>
               ) : (
                 ritualHistory.scheduled.map((ritual) => (
                   <Card key={ritual.id}>
                     <CardHeader>
                       <div className="flex justify-between items-center">
-                        <CardTitle>Scheduled for {ritual.scheduledDate}</CardTitle>
+                        <CardTitle>Analysis Scheduled for {ritual.scheduledDate}</CardTitle>
                         <div className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 text-xs font-medium px-2.5 py-0.5 rounded-full">
                           Pending
                         </div>
