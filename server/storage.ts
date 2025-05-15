@@ -333,6 +333,66 @@ export class DatabaseStorage implements IStorage {
         level: "info",
       });
     }
+    
+    // Seed metrics data
+    const metricsCount = await db.select({ count: sql`count(*)` }).from(systemMetrics);
+    if (metricsCount[0].count === "0") {
+      const now = new Date();
+      const metricsData = [
+        { 
+          timestamp: new Date(now.getTime() - 5 * 60 * 60 * 1000),
+          cpuUsage: 45,
+          memoryUsage: 350,
+          storageUsage: 120,
+          networkUsage: 250,
+          operationsCount: 63
+        },
+        { 
+          timestamp: new Date(now.getTime() - 4 * 60 * 60 * 1000),
+          cpuUsage: 32,
+          memoryUsage: 310,
+          storageUsage: 110,
+          networkUsage: 200,
+          operationsCount: 42
+        },
+        { 
+          timestamp: new Date(now.getTime() - 3 * 60 * 60 * 1000),
+          cpuUsage: 38,
+          memoryUsage: 330,
+          storageUsage: 115,
+          networkUsage: 220,
+          operationsCount: 51
+        },
+        { 
+          timestamp: new Date(now.getTime() - 2 * 60 * 60 * 1000),
+          cpuUsage: 25,
+          memoryUsage: 280,
+          storageUsage: 100,
+          networkUsage: 180,
+          operationsCount: 30
+        },
+        { 
+          timestamp: new Date(now.getTime() - 1 * 60 * 60 * 1000),
+          cpuUsage: 42,
+          memoryUsage: 340,
+          storageUsage: 125,
+          networkUsage: 240,
+          operationsCount: 56
+        },
+        { 
+          timestamp: now,
+          cpuUsage: 36,
+          memoryUsage: 320,
+          storageUsage: 118,
+          networkUsage: 210,
+          operationsCount: 60
+        }
+      ];
+      
+      for (const metric of metricsData) {
+        await this.recordMetric(metric);
+      }
+    }
   }
 }
 
