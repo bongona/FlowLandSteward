@@ -138,7 +138,7 @@ export class DatabaseStorage implements IStorage {
     
     return db.select()
       .from(systemMetrics)
-      .where(gte(systemMetrics.timestamp, cutoffTime.toISOString()))
+      .where(sql`${systemMetrics.timestamp} >= ${cutoffTime}`)
       .orderBy(asc(systemMetrics.timestamp));
   }
   
@@ -180,7 +180,7 @@ export class DatabaseStorage implements IStorage {
         .update(tributeConfig)
         .set({
           creditsAccrued: sql`${tributeConfig.creditsAccrued} + ${credits}`,
-          resourceUsageMb: sql`${tributeConfig.resourceUsageMb} + ${resourceMB}`,
+          resourceUsageMB: sql`${tributeConfig.resourceUsageMB} + ${resourceMB}`,
           operationsTracked: sql`${tributeConfig.operationsTracked} + ${operations}`,
         })
         .where(eq(tributeConfig.id, config.id))
