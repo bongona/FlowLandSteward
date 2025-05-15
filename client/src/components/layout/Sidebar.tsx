@@ -3,6 +3,21 @@ import { Link } from "wouter";
 import { useTheme } from "@/components/ThemeProvider";
 import { Button } from "@/components/ui/button";
 
+type MenuItem = {
+  path: string;
+  label: string;
+  icon: string;
+  status?: {
+    label: string;
+    color: string;
+  };
+};
+
+type MenuCategory = {
+  category: string;
+  items: MenuItem[];
+};
+
 type SidebarProps = {
   currentPath: string;
 };
@@ -15,7 +30,7 @@ export default function Sidebar({ currentPath }: SidebarProps) {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
-  const menuItems = [
+  const menuItems: MenuCategory[] = [
     { 
       category: "Control Center", 
       items: [
@@ -96,7 +111,7 @@ export default function Sidebar({ currentPath }: SidebarProps) {
                       <i className={`fas ${item.icon} w-5 text-center`}></i>
                       <span>{item.label}</span>
                     </div>
-                    {'status' in item && item.status && (
+                    {item.status && (
                       <span className={`px-2 py-1 text-xs font-medium rounded-full ${
                         item.status.color === 'green' 
                           ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' 
