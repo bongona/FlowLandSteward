@@ -167,14 +167,11 @@ export class DatabaseStorage implements IStorage {
   }
   
   async getMetricsHistory(hours: number = 24): Promise<SystemMetric[]> {
-    const cutoffTime = new Date();
-    cutoffTime.setHours(cutoffTime.getHours() - hours);
-    
-    // Use a raw SQL condition for timestamp comparison
+    // Simplify the query to avoid SQL parameter issues
     return db.select()
       .from(systemMetrics)
-      .where(sql`${systemMetrics.timestamp} >= NOW() - INTERVAL '${hours} HOURS'`)
-      .orderBy(asc(systemMetrics.timestamp));
+      .orderBy(desc(systemMetrics.timestamp))
+      .limit(hours);
   }
   
   async recordMetric(insertMetric: InsertSystemMetric): Promise<SystemMetric> {
