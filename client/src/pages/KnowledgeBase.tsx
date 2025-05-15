@@ -19,7 +19,14 @@ interface KnowledgeItem {
 
 export default function KnowledgeBase() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [helpActive, setHelpActive] = useState(true);
+  const { tooltipsEnabled, toggleTooltips } = useTooltip();
+  
+  useEffect(() => {
+    // When the knowledge base page is opened, we should enable tooltips if they're disabled
+    if (!tooltipsEnabled) {
+      toggleTooltips();
+    }
+  }, []);
   
   const knowledgeItems: KnowledgeItem[] = [
     {
@@ -151,24 +158,17 @@ export default function KnowledgeBase() {
           <p className="text-muted-foreground">Learn how to optimize your Flow Land experience</p>
         </div>
         
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button 
-                variant={helpActive ? "default" : "outline"} 
-                size="sm"
-                onClick={() => setHelpActive(!helpActive)}
-                className="flex items-center gap-2"
-              >
-                <i className="fas fa-question-circle"></i>
-                <span>Tooltips {helpActive ? 'Enabled' : 'Disabled'}</span>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="left">
-              <p className="max-w-xs">Toggle contextual tooltips throughout the application to learn about features</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <HelpTooltip content={<p>Toggle contextual tooltips throughout the application</p>} side="left">
+          <Button 
+            variant={tooltipsEnabled ? "default" : "outline"} 
+            size="sm"
+            onClick={toggleTooltips}
+            className="flex items-center gap-2"
+          >
+            <i className="fas fa-question-circle"></i>
+            <span>Tooltips {tooltipsEnabled ? 'Enabled' : 'Disabled'}</span>
+          </Button>
+        </HelpTooltip>
       </div>
       
       <Card className="mb-6">

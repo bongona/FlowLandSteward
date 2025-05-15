@@ -5,6 +5,7 @@ import ActivityLog from "@/components/dashboard/ActivityLog";
 import FlowMetricsChart from "@/components/dashboard/FlowMetricsChart";
 import TributeManagement from "@/components/dashboard/TributeManagement";
 import AgentCard from "@/components/layout/AgentCard";
+import InlineHelp from "@/components/ui/InlineHelp";
 
 export default function Dashboard() {
   const { 
@@ -63,6 +64,10 @@ export default function Dashboard() {
       
       {/* System Status Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="col-span-full flex items-center mb-2">
+          <h3 className="text-lg font-medium">System Status</h3>
+          <InlineHelp topic="status-cards" position="dashboard" />
+        </div>
         {statusLoading ? (
           Array(4).fill(0).map((_, i) => (
             <div key={i} className="bg-white dark:bg-neutral shadow rounded-lg p-4 animate-pulse">
