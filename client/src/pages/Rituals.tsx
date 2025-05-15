@@ -64,8 +64,8 @@ export default function Rituals() {
     <div className="p-6 space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-2xl font-bold">Monetization Rituals</h2>
-          <p className="text-gray-600 dark:text-gray-400">Review past rituals and initiate new ones</p>
+          <h2 className="text-2xl font-bold">Resource Allocation Analysis</h2>
+          <p className="text-gray-600 dark:text-gray-400">Review historical analyses and configure new evaluations</p>
         </div>
         <Button variant="default" className="bg-accent hover:bg-accent-dark" onClick={() => setIsRitualOpen(true)}>
           <i className="fas fa-chart-line mr-2"></i>
@@ -75,29 +75,29 @@ export default function Rituals() {
       
       <div className="bg-white dark:bg-neutral shadow rounded-lg p-6">
         <div className="mb-6">
-          <h3 className="text-lg font-bold">What are Monetization Rituals?</h3>
+          <h3 className="text-lg font-bold">About Resource Allocation Analysis</h3>
           <p className="mt-2 text-gray-600 dark:text-gray-400">
-            Monetization Rituals are analytical cycles that evaluate your domain's flow patterns to propose optimized 
-            monetization strategies. During this process, our advanced Reflexologist agent analyzes your domain's 
-            resource allocation patterns and operation frequency to recommend optimal tribute configurations.
+            Resource allocation analyses evaluate operational patterns and utilization metrics to propose optimized 
+            resource management strategies. The system employs statistical modeling and pattern recognition to identify 
+            efficiency opportunities and recommend optimal contribution distribution models.
           </p>
           <p className="mt-2 text-gray-600 dark:text-gray-400">
-            All recommendations require your explicit approval before implementation, ensuring complete sovereignty 
-            over your domain's tribute collection methodology.
+            All computational recommendations undergo administrative review before implementation, preserving full 
+            administrative control over resource management policies and tribute collection methodologies.
           </p>
         </div>
         
         <div className="grid gap-4 md:grid-cols-2 mb-4">
           {ritualHistory?.domainContext && (
             <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-              <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-3">Domain Analysis</h4>
+              <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-3">Domain Context Classification</h4>
               <ul className="space-y-2">
                 <li className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">Flow Complexity:</span>
+                  <span className="text-gray-600 dark:text-gray-400">Operational Complexity:</span>
                   <span className="font-medium">{ritualHistory.domainContext.flowComplexity}</span>
                 </li>
                 <li className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">Resource Intensity:</span>
+                  <span className="text-gray-600 dark:text-gray-400">Resource Utilization:</span>
                   <span className="font-medium">{ritualHistory.domainContext.resourceIntensity}</span>
                 </li>
                 <li className="flex justify-between">
@@ -110,18 +110,18 @@ export default function Rituals() {
           
           {ritualHistory?.ritualStatus && (
             <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-              <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-3">Ritual Status</h4>
+              <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-3">Analysis Status</h4>
               <ul className="space-y-2">
                 <li className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">Can Perform:</span>
+                  <span className="text-gray-600 dark:text-gray-400">Analysis Available:</span>
                   <span className="font-medium">{ritualHistory.ritualStatus.canPerform ? 'Yes' : 'No'}</span>
                 </li>
                 <li className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">Recommended Interval:</span>
+                  <span className="text-gray-600 dark:text-gray-400">Optimal Interval:</span>
                   <span className="font-medium">{ritualHistory.ritualStatus.recommendedInterval}</span>
                 </li>
                 <li className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">Next Recommended:</span>
+                  <span className="text-gray-600 dark:text-gray-400">Next Scheduled:</span>
                   <span className="font-medium">{ritualHistory.ritualStatus.nextRecommendedDate}</span>
                 </li>
               </ul>
@@ -135,7 +135,7 @@ export default function Rituals() {
               <i className="fas fa-info-circle text-xl"></i>
             </div>
             <div>
-              <span className="font-medium">Last ritual performed:</span>
+              <span className="font-medium">Last analysis completed:</span>
               <span className="ml-2">{ritualHistory?.lastRitual || 'Never'}</span>
             </div>
           </div>
