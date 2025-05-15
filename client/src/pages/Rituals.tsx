@@ -39,7 +39,7 @@ export default function Rituals() {
   const { 
     data: ritualHistory,
     isLoading,
-  } = useQuery({
+  } = useQuery<RitualHistoryResponse>({
     queryKey: ['/api/monetization/rituals'],
   });
   
@@ -68,8 +68,8 @@ export default function Rituals() {
           <p className="text-gray-600 dark:text-gray-400">Review past rituals and initiate new ones</p>
         </div>
         <Button variant="default" className="bg-accent hover:bg-accent-dark" onClick={() => setIsRitualOpen(true)}>
-          <i className="fas fa-sync-alt mr-2"></i>
-          Start New Ritual
+          <i className="fas fa-chart-line mr-2"></i>
+          New Analysis
         </Button>
       </div>
       

@@ -35,9 +35,9 @@ export default function MonetizationRitual({ isOpen, onClose }: MonetizationRitu
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle className="text-xl">Monetization Ritual</DialogTitle>
+          <DialogTitle className="text-xl">Monetization Strategy Analysis</DialogTitle>
           <DialogDescription>
-            Analyze domain flow patterns and optimize monetization strategies
+            Analyze operational patterns to optimize resource allocation and tribute collection strategies
           </DialogDescription>
         </DialogHeader>
         
@@ -48,18 +48,18 @@ export default function MonetizationRitual({ isOpen, onClose }: MonetizationRitu
                 <i className="fas fa-info-circle"></i>
               </div>
               <div>
-                <h4 className="font-medium text-blue-800 dark:text-blue-300">About the Monetization Ritual</h4>
+                <h4 className="font-medium text-blue-800 dark:text-blue-300">About the Monetization Strategy Analysis</h4>
                 <p className="text-sm text-blue-600 dark:text-blue-200 mt-1">
-                  This ritual analyzes your domain's flow patterns and proposes optimized monetization strategies based on usage. All proposals require your explicit approval before implementation.
+                  This analytical process evaluates your domain's operational patterns and resource utilization to propose optimized resource allocation and tribute collection strategies. All recommendations require explicit administrative approval before implementation.
                 </p>
               </div>
             </div>
           </div>
           
           <div className="space-y-4">
-            <h4 className="font-medium">LLM Reflexologist Activation</h4>
+            <h4 className="font-medium">Pattern Analysis Agent Configuration</h4>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              The ritual will activate your dormant LLM Reflexologist agent to analyze your flow friction logs and suggest potential monetization strategies tailored to your usage patterns.
+              This process activates the advanced analysis engine to evaluate operational patterns, resource allocation efficiency, and utilize statistical models to propose optimized tribute collection mechanisms aligned with your domain's specific utilization patterns.
             </p>
             
             <div className="bg-gray-50 dark:bg-neutral-dark/50 p-4 rounded-lg">
@@ -92,9 +92,9 @@ export default function MonetizationRitual({ isOpen, onClose }: MonetizationRitu
                   onCheckedChange={() => handleCheckboxChange('resourceUsage')}
                 />
                 <div className="grid gap-1.5">
-                  <Label htmlFor="data-usage" className="font-medium">Resource Usage Patterns</Label>
+                  <Label htmlFor="data-usage" className="font-medium">Computational Resource Allocation</Label>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    CPU, memory, storage, and bandwidth consumption
+                    Computing, memory, storage, and network resource utilization metrics
                   </p>
                 </div>
               </div>
@@ -106,9 +106,9 @@ export default function MonetizationRitual({ isOpen, onClose }: MonetizationRitu
                   onCheckedChange={() => handleCheckboxChange('operationFrequency')}
                 />
                 <div className="grid gap-1.5">
-                  <Label htmlFor="data-operations" className="font-medium">Operation Frequency</Label>
+                  <Label htmlFor="data-operations" className="font-medium">Operation Frequency Distribution</Label>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    Types and volumes of system operations
+                    Temporal patterns of system operations with volume metrics
                   </p>
                 </div>
               </div>
@@ -120,9 +120,9 @@ export default function MonetizationRitual({ isOpen, onClose }: MonetizationRitu
                   onCheckedChange={() => handleCheckboxChange('domainContext')}
                 />
                 <div className="grid gap-1.5">
-                  <Label htmlFor="data-context" className="font-medium">Domain Context</Label>
+                  <Label htmlFor="data-context" className="font-medium">Domain Context Classification</Label>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    Project type and industry vertical (if available)
+                    Semantic analysis of domain utilization patterns and sectoral classification
                   </p>
                 </div>
               </div>
@@ -135,7 +135,7 @@ export default function MonetizationRitual({ isOpen, onClose }: MonetizationRitu
             Cancel
           </Button>
           <Button variant="default" onClick={handleBeginRitual}>
-            Begin Ritual
+            Initialize Analysis
           </Button>
         </DialogFooter>
       </DialogContent>
