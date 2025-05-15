@@ -5,6 +5,34 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import MonetizationRitual from "@/components/modals/MonetizationRitual";
 
+// Define types for the API response
+interface RitualHistoryResponse {
+  lastRitual: string;
+  completed: Array<{
+    id: number;
+    date: string;
+    daysAnalyzed: number;
+    recommendedMode: string;
+    keyInsight: string;
+  }>;
+  scheduled: Array<{
+    id: number;
+    scheduledDate: string;
+    daysToAnalyze: number;
+    dataSelection: string[];
+  }>;
+  ritualStatus?: {
+    canPerform: boolean;
+    recommendedInterval: string;
+    nextRecommendedDate: string;
+  };
+  domainContext?: {
+    flowComplexity: string;
+    resourceIntensity: string;
+    userInteractionFrequency: string;
+  };
+}
+
 export default function Rituals() {
   const [isRitualOpen, setIsRitualOpen] = useState(false);
   
@@ -49,14 +77,56 @@ export default function Rituals() {
         <div className="mb-6">
           <h3 className="text-lg font-bold">What are Monetization Rituals?</h3>
           <p className="mt-2 text-gray-600 dark:text-gray-400">
-            Monetization Rituals are reflection cycles where your system's flow patterns are analyzed to propose optimized 
-            monetization strategies. The LLM Reflexologist agent is temporarily activated during rituals to analyze your 
-            domain's unique usage patterns and suggest potential tribute configurations.
+            Monetization Rituals are analytical cycles that evaluate your domain's flow patterns to propose optimized 
+            monetization strategies. During this process, our advanced Reflexologist agent analyzes your domain's 
+            resource allocation patterns and operation frequency to recommend optimal tribute configurations.
           </p>
           <p className="mt-2 text-gray-600 dark:text-gray-400">
-            All proposals require your explicit approval before implementation, ensuring you maintain complete sovereignty 
-            over how your domain manages tribute collection.
+            All recommendations require your explicit approval before implementation, ensuring complete sovereignty 
+            over your domain's tribute collection methodology.
           </p>
+        </div>
+        
+        <div className="grid gap-4 md:grid-cols-2 mb-4">
+          {ritualHistory?.domainContext && (
+            <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+              <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-3">Domain Analysis</h4>
+              <ul className="space-y-2">
+                <li className="flex justify-between">
+                  <span className="text-gray-600 dark:text-gray-400">Flow Complexity:</span>
+                  <span className="font-medium">{ritualHistory.domainContext.flowComplexity}</span>
+                </li>
+                <li className="flex justify-between">
+                  <span className="text-gray-600 dark:text-gray-400">Resource Intensity:</span>
+                  <span className="font-medium">{ritualHistory.domainContext.resourceIntensity}</span>
+                </li>
+                <li className="flex justify-between">
+                  <span className="text-gray-600 dark:text-gray-400">Interaction Frequency:</span>
+                  <span className="font-medium">{ritualHistory.domainContext.userInteractionFrequency}</span>
+                </li>
+              </ul>
+            </div>
+          )}
+          
+          {ritualHistory?.ritualStatus && (
+            <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+              <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-3">Ritual Status</h4>
+              <ul className="space-y-2">
+                <li className="flex justify-between">
+                  <span className="text-gray-600 dark:text-gray-400">Can Perform:</span>
+                  <span className="font-medium">{ritualHistory.ritualStatus.canPerform ? 'Yes' : 'No'}</span>
+                </li>
+                <li className="flex justify-between">
+                  <span className="text-gray-600 dark:text-gray-400">Recommended Interval:</span>
+                  <span className="font-medium">{ritualHistory.ritualStatus.recommendedInterval}</span>
+                </li>
+                <li className="flex justify-between">
+                  <span className="text-gray-600 dark:text-gray-400">Next Recommended:</span>
+                  <span className="font-medium">{ritualHistory.ritualStatus.nextRecommendedDate}</span>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
         
         <div className="flex items-center justify-between p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
@@ -66,7 +136,7 @@ export default function Rituals() {
             </div>
             <div>
               <span className="font-medium">Last ritual performed:</span>
-              <span className="ml-2">{ritualHistory.lastRitual || 'Never'}</span>
+              <span className="ml-2">{ritualHistory?.lastRitual || 'Never'}</span>
             </div>
           </div>
           <Button variant="link" className="text-primary hover:text-primary-dark dark:hover:text-primary-light">
@@ -86,7 +156,7 @@ export default function Rituals() {
           
           <TabsContent value="completed">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {ritualHistory.completed.length === 0 ? (
+              {!ritualHistory?.completed || ritualHistory.completed.length === 0 ? (
                 <div className="col-span-2 text-center py-12 bg-white dark:bg-neutral rounded-lg shadow">
                   <div className="text-gray-400 mb-2">
                     <i className="fas fa-scroll text-4xl"></i>
@@ -135,7 +205,7 @@ export default function Rituals() {
           
           <TabsContent value="scheduled">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {ritualHistory.scheduled.length === 0 ? (
+              {!ritualHistory?.scheduled || ritualHistory.scheduled.length === 0 ? (
                 <div className="col-span-2 text-center py-12 bg-white dark:bg-neutral rounded-lg shadow">
                   <div className="text-gray-400 mb-2">
                     <i className="fas fa-calendar text-4xl"></i>

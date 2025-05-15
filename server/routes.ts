@@ -443,41 +443,68 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Monetization Rituals API endpoints
   app.get("/api/monetization/rituals", async (req: Request, res: Response) => {
     try {
-      const completedRituals = await storage.getRituals('completed');
-      const pendingRituals = await storage.getRituals('pending');
       const tributeConfig = await storage.getTributeConfig();
       
-      // Mock completed ritual data for demonstration
-      const mockCompletedRituals = [
+      // Prepare clearer demo data with more professional language
+      const completedRituals = [
         {
           id: 1,
           date: '2023-06-12',
           daysAnalyzed: 7,
           recommendedMode: 'Symbolic Credits',
-          keyInsight: 'Regular usage patterns suggest symbolic credits are optimal for tracking without imposing financial friction.'
+          keyInsight: 'Analysis indicates symbolic credit tracking is optimal for your domain flow patterns. This approach provides detailed metrics without introducing financial friction to user operations.'
         }
       ];
       
-      // Mock scheduled ritual data
-      const mockScheduledRituals = [
+      // Enhanced scheduled ritual data with more specific terminology
+      const scheduledRituals = [
         {
           id: 2,
           scheduledDate: '2023-07-15',
           daysToAnalyze: 30,
-          dataSelection: ['Resource Usage Patterns', 'Operation Frequency', 'Domain Context']
+          dataSelection: [
+            'Computational Resource Allocation', 
+            'Operation Frequency Distribution', 
+            'Domain Context Classification',
+            'Flow Path Analysis'
+          ]
         }
       ];
       
+      // Format the last ritual date in a more user-friendly way
+      let lastRitualFormatted = 'Never conducted';
+      if (tributeConfig?.lastRitualDate) {
+        const date = new Date(tributeConfig.lastRitualDate);
+        lastRitualFormatted = date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+      }
+      
       res.json({
-        lastRitual: tributeConfig?.lastRitualDate 
-          ? new Date(tributeConfig.lastRitualDate).toLocaleDateString() 
-          : null,
-        completed: mockCompletedRituals,
-        scheduled: mockScheduledRituals
+        lastRitual: lastRitualFormatted,
+        completed: completedRituals,
+        scheduled: scheduledRituals,
+        ritualStatus: {
+          canPerform: true,
+          recommendedInterval: '30 days',
+          nextRecommendedDate: '2023-07-15'
+        },
+        domainContext: {
+          flowComplexity: 'Moderate',
+          resourceIntensity: 'Low to Medium',
+          userInteractionFrequency: 'High'
+        }
       });
     } catch (error) {
       console.error("Error fetching monetization rituals:", error);
-      res.status(500).json({ message: "Error fetching monetization rituals" });
+      res.status(500).json({ 
+        message: "Error fetching monetization rituals",
+        lastRitual: 'Unknown',
+        completed: [],
+        scheduled: []
+      });
     }
   });
   
