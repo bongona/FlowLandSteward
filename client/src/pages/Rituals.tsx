@@ -169,21 +169,21 @@ export default function Rituals() {
                   <Card key={ritual.id}>
                     <CardHeader>
                       <div className="flex justify-between items-center">
-                        <CardTitle>{ritual.date}</CardTitle>
+                        <CardTitle>Analysis from {ritual.date}</CardTitle>
                         <div className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 text-xs font-medium px-2.5 py-0.5 rounded-full">
                           Completed
                         </div>
                       </div>
-                      <CardDescription>Analyzed {ritual.daysAnalyzed} days of data</CardDescription>
+                      <CardDescription>Evaluation period: {ritual.daysAnalyzed} operational days</CardDescription>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-3">
                         <div>
-                          <span className="font-medium">Recommended Mode:</span>
+                          <span className="font-medium">Recommended Resource Allocation Model:</span>
                           <span className="ml-2">{ritual.recommendedMode}</span>
                         </div>
                         <div>
-                          <span className="font-medium">Key Insight:</span>
+                          <span className="font-medium">Primary Analysis Finding:</span>
                           <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{ritual.keyInsight}</p>
                         </div>
                       </div>
@@ -191,10 +191,10 @@ export default function Rituals() {
                     <CardFooter className="flex justify-between">
                       <Button variant="outline" size="sm">
                         <i className="fas fa-download mr-1 text-xs"></i>
-                        Export
+                        Export Data
                       </Button>
                       <Button variant="link" size="sm" className="text-primary hover:text-primary-dark dark:hover:text-primary-light">
-                        View Details
+                        View Analysis Details
                       </Button>
                     </CardFooter>
                   </Card>
@@ -240,10 +240,10 @@ export default function Rituals() {
                     </CardContent>
                     <CardFooter className="flex justify-end space-x-2">
                       <Button variant="outline" size="sm">
-                        Cancel
+                        Cancel Analysis
                       </Button>
                       <Button variant="default" size="sm">
-                        Edit
+                        Modify Parameters
                       </Button>
                     </CardFooter>
                   </Card>
