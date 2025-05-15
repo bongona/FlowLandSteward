@@ -116,7 +116,6 @@ export default function Settings() {
                 <div>
                   <Label htmlFor="domain-visibility" className="font-medium">Domain Visibility</Label>
                   <Select 
-                    id="domain-visibility"
                     value={domainVisibility} 
                     onValueChange={setDomainVisibility}
                   >
@@ -134,7 +133,6 @@ export default function Settings() {
                 <div className="pt-3 border-t border-gray-100 dark:border-gray-800">
                   <Label htmlFor="logging-level" className="font-medium">Logging Level</Label>
                   <Select 
-                    id="logging-level"
                     value={loggingLevel} 
                     onValueChange={setLoggingLevel}
                   >
@@ -306,7 +304,6 @@ export default function Settings() {
                     <div className="pt-3 border-t border-gray-100 dark:border-gray-800">
                       <Label htmlFor="backup-frequency" className="font-medium">Backup Frequency</Label>
                       <Select 
-                        id="backup-frequency"
                         value={backupFrequency} 
                         onValueChange={setBackupFrequency}
                       >

@@ -87,26 +87,24 @@ export default function Sidebar({ currentPath }: SidebarProps) {
             <ul className="space-y-1">
               {category.items.map((item) => (
                 <li key={item.path}>
-                  <Link href={item.path}>
-                    <a className={`flex items-center justify-between p-2 rounded-md ${
+                  <Link href={item.path} className={`flex items-center justify-between p-2 rounded-md ${
                       currentPath === item.path 
                         ? "bg-sidebar-primary/10 dark:bg-sidebar-primary/20 text-sidebar-primary dark:text-sidebar-primary-foreground font-medium" 
                         : "hover:bg-gray-100 dark:hover:bg-sidebar-border/10"
                     }`}>
-                      <div className="flex items-center space-x-2">
-                        <i className={`fas ${item.icon} w-5 text-center`}></i>
-                        <span>{item.label}</span>
-                      </div>
-                      {item.status && (
-                        <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                          item.status.color === 'green' 
-                            ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' 
-                            : 'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200'
-                        }`}>
-                          {item.status.label}
-                        </span>
-                      )}
-                    </a>
+                    <div className="flex items-center space-x-2">
+                      <i className={`fas ${item.icon} w-5 text-center`}></i>
+                      <span>{item.label}</span>
+                    </div>
+                    {'status' in item && item.status && (
+                      <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                        item.status.color === 'green' 
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' 
+                          : 'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200'
+                      }`}>
+                        {item.status.label}
+                      </span>
+                    )}
                   </Link>
                 </li>
               ))}
