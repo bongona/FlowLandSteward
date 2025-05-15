@@ -5,13 +5,19 @@ import HelpTooltip from '@/components/ui/HelpTooltip';
 interface InlineHelpProps {
   topic: string;
   position?: 'dashboard' | 'tribute' | 'integrity' | 'rituals' | 'agents';
+  analyzeData?: boolean;
 }
 
 /**
  * This component displays context-aware help for various parts of the application
  * It shows tooltips based on the current section and topic when tooltips are enabled
+ * With analyzeData=true, it will also provide economic analysis and search optimization hints
  */
-const InlineHelp: React.FC<InlineHelpProps> = ({ topic, position = 'dashboard' }) => {
+const InlineHelp: React.FC<InlineHelpProps> = ({ 
+  topic, 
+  position = 'dashboard',
+  analyzeData = true // Default to true to analyze economy and provide guidance
+}) => {
   const { tooltipsEnabled } = useTooltip();
   
   if (!tooltipsEnabled) return null;
@@ -107,8 +113,24 @@ const InlineHelp: React.FC<InlineHelpProps> = ({ topic, position = 'dashboard' }
   
   if (!content) return null;
   
+  // Map position to dataType for the HelpTooltip
+  const dataTypeMap = {
+    'dashboard': 'dashboard',
+    'tribute': 'tribute',
+    'integrity': 'integrity',
+    'agents': 'agents',
+    'rituals': 'monetization'
+  };
+  
+  // Convert position to dataType for the HelpTooltip
+  const dataType = dataTypeMap[position] || 'dashboard';
+  
   return (
-    <HelpTooltip content={content}>
+    <HelpTooltip 
+      content={content} 
+      analyzeData={analyzeData}
+      dataType={dataType as 'tribute' | 'integrity' | 'agents' | 'monetization' | 'dashboard'}
+    >
       <i className="fas fa-info-circle text-blue-500 cursor-help ml-1.5 text-sm" />
     </HelpTooltip>
   );
