@@ -1,6 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { storage } from "./storage";
 
 const app = express();
 app.use(express.json());
@@ -54,6 +55,14 @@ app.use((req, res, next) => {
     await setupVite(app, server);
   } else {
     serveStatic(app);
+  }
+
+  // Initialize database with default data
+  try {
+    await storage.seedDefaultData();
+    log("Database initialized with default data");
+  } catch (error) {
+    log(`Error initializing database: ${error}`, "error");
   }
 
   // ALWAYS serve the app on port 5000

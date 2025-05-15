@@ -1,4 +1,5 @@
 import { pgTable, text, serial, integer, boolean, timestamp, jsonb } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -21,6 +22,11 @@ export const agents = pgTable("agents", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+// Agent relations
+export const agentsRelations = relations(agents, ({ many }) => ({
+  logs: many(activityLogs),
+}));
+
 // Activity logs table
 export const activityLogs = pgTable("activity_logs", {
   id: serial("id").primaryKey(),
@@ -30,6 +36,14 @@ export const activityLogs = pgTable("activity_logs", {
   level: text("level").notNull().default("info"),
   metadata: jsonb("metadata"),
 });
+
+// Activity logs relations
+export const activityLogsRelations = relations(activityLogs, ({ one }) => ({
+  agent: one(agents, {
+    fields: [activityLogs.agentId],
+    references: [agents.id],
+  }),
+}));
 
 // System metrics table
 export const systemMetrics = pgTable("system_metrics", {
@@ -63,6 +77,7 @@ export const monetizationRituals = pgTable("monetization_rituals", {
   recommendedMode: text("recommended_mode"),
   insights: jsonb("insights"),
   dataSelectionConfig: jsonb("data_selection_config").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
 });
 
 // Integrity checks table
